@@ -45,7 +45,7 @@
         }
         .rate-btns button.active { background: #19547b; color: #fff; }
         .hidden { display: none; }
-        #rate-content {
+        #rate-content, #now-content {
             width: 100%;
             height: calc(100vh - 70px - 32px - 50px); /* 視窗高-導航列-上padding-按鈕高度 */
             min-height: 400px;
@@ -56,7 +56,7 @@
             box-shadow: 0 2px 8px #0001;
             display: flex;
         }
-        #rate-frame {
+        #rate-frame, #now-frame {
             width: 100%;
             height: 100%;
             border: none;
@@ -68,6 +68,7 @@
             #page-news, #page-rate { padding: 12px 4px; }
             #rate-content { min-height: 250px; }
         }
+
         .spinner {
             width: 64px; height: 64px; border: 8px solid #f3f3f3;
             border-top: 8px solid #19547b; border-radius: 50%;
@@ -88,6 +89,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="nav">
         <button id="tab-rate" class="active">歷史匯率</button>
@@ -113,14 +115,14 @@
             </div>
         </div>
         <!-- 即時匯率頁 -->
-        <div id="page-now" class="hidden">
+        <div id="page-now" class="page hidden">
             <div class="rate-btns">
-                <button class="active" data-currency="USD">USD</button>
-                <button data-currency="EUR">EUR</button>
-                <button data-currency="JPY">JPY</button>
-                <button data-currency="CNY">CNY</button>
+                <button class="active" data-currency="USD" data-type="now">USD</button>
+                <button data-currency="EUR" data-type="now">EUR</button>
+                <button data-currency="JPY" data-type="now">JPY</button>
+                <button data-currency="CNY" data-type="now">CNY</button>
             </div>
-            <div id="now-content" class="rate-content">
+            <div id="now-content">
                 <div id="now-loading-spinner" style="display:none;position:absolute;z-index:2;left:0;top:0;width:100%;height:100%;
                                                      background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;">
                     <div class="spinner"></div>
