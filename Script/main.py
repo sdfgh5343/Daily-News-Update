@@ -2,6 +2,7 @@ import datetime
 import pandas as pd
 from get_news import get_daily_cnn_business_news_txt
 from Download_historical import fetch_twbank_exchange, get_and_save_exchange_rates
+from Plot_Historical_Price import plot_currency, plot_now
 
 if __name__ == "__main__":
     # 下載歷史資料
@@ -31,4 +32,8 @@ if __name__ == "__main__":
 
     # 下載 CNN Business的新聞
     get_daily_cnn_business_news_txt("../News/cnn_news.txt", limit=20)
+    
+    for currency in ["USD","JPY","EUR","CNY"]:
+        plot_now(currency)
+        plot_currency(currency)
     
