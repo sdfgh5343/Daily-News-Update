@@ -2,13 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>匯率儀表板</title>
+    <title>My Mini Dashboard</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background: #f8f9fa;}
         .nav { display: flex; background: #19547b; color: #fff; position: sticky; top: 0; z-index: 10;}
         .nav button { background:none; border:none; color:#fff; font-size:1rem; padding:1rem 2rem; cursor:pointer;}
         .nav button.active { background: #ffe259; color: #19547b; font-weight:bold; }
-
         .container {
             width: 100vw;
             min-height: calc(100vh - 70px);
@@ -21,103 +20,272 @@
             flex-direction: column;
             align-items: stretch;
         }
-
-        .page { padding: 20px; }
-        .hidden { display: none; }
-
+        #page-news, #page-rate {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 32px 24px;
+        }
+        .rate-btns {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            padding-top: 0 px;
+            /* 上方直接貼齊，不要空隙 */
+        }
         .rate-btns button {
-            border: 1px solid #19547b; background: #fff; color: #19547b;
-            border-radius: 8px; padding: 0.6rem 1.2rem; font-size:1rem; cursor:pointer;
+            border: 1px solid #19547b;
+            background: #fff;
+            color: #19547b;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            font-size:1rem;
+            cursor:pointer;
         }
         .rate-btns button.active { background: #19547b; color: #fff; }
-
-        iframe {
-            width:100%; height: calc(100vh - 200px); border:none;
+        .hidden { display: none; }
+        #rate-content {
+            width: 100%;
+            height: calc(100vh - 70px - 32px - 50px); /* 視窗高-導航列-上padding-按鈕高度 */
+            min-height: 400px;
+            background: #f5f7fa;
+            border-radius: 12px;
+            overflow: hidden;
+            box-sizing: border-box;
+            box-shadow: 0 2px 8px #0001;
+            display: flex;
         }
-
+        #rate-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #f5f7fa;
+            display: block;
+        }
+        @media (max-width: 800px) {
+            .container { padding: 0; }
+            #page-news, #page-rate { padding: 12px 4px; }
+            #rate-content { min-height: 250px; }
+        }
+        .spinner {
+            width: 64px; height: 64px; border: 8px solid #f3f3f3;
+            border-top: 8px solid #19547b; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        .js-plotly-plot .modebar-group .modebar-btn,
+        .js-plotly-plot .updatemenu-buttons .button {
+            border-radius: 12px !important;    /* 讓切換按鈕圓角 */
+        }
+        .js-plotly-plot .updatemenu-buttons .button.active {
+            background: #19547b !important;    /* active 色和字色 */
+            color: #fff !important;
+            border-color: #19547b !important;
+        }
     </style>
 </head>
 <body>
     <div class="nav">
-        <button id="tab-history" class="active">歷史匯率</button>
+        <button id="tab-rate" class="active">歷史匯率</button>
         <button id="tab-now">即時匯率</button>
         <button id="tab-news">CNN Business</button>
     </div>
-
     <div class="container">
-        <!-- 歷史匯率頁面 -->
-        <div id="page-history" class="page">
+        <!-- 歷史匯率頁 -->
+        <div id="page-rate">
+            <div class="rate-btns">
+                <button class="active" data-currency="USD" data-type="history">USD</button>
+                <button data-currency="EUR" data-type="history">EUR</button>
+                <button data-currency="JPY" data-type="history">JPY</button>
+                <button data-currency="CNY" data-type="history">CNY</button>
+            </div>
+            <div id="rate-content">
+                <div id="loading-spinner" style="
+                    display:none; position:absolute; z-index:2; left:0; top:0; width:100%; height:100%;
+                    background:rgba(255,255,255,0.8); display:flex; align-items:center; justify-content:center;">
+                    <div class="spinner"></div>
+                </div>
+                <iframe id="rate-frame" src="Figure/plot_USD.html"></iframe>
+            </div>
+        </div>
+        <!-- 即時匯率頁 -->
+        <div id="page-now" class="hidden">
             <div class="rate-btns">
                 <button class="active" data-currency="USD">USD</button>
                 <button data-currency="EUR">EUR</button>
                 <button data-currency="JPY">JPY</button>
                 <button data-currency="CNY">CNY</button>
             </div>
-            <iframe id="frame-history" src="plot_USD.html"></iframe>
-        </div>
-
-        <!-- 即時匯率頁面 -->
-        <div id="page-now" class="page hidden">
-            <div class="rate-btns">
-                <button class="active" data-currency="USD">USD</button>
-                <button data-currency="EUR">EUR</button>
-                <button data-currency="JPY">JPY</button>
-                <button data-currency="CNY">CNY</button>
+            <div id="now-content" class="rate-content">
+                <div id="now-loading-spinner" style="display:none;position:absolute;z-index:2;left:0;top:0;width:100%;height:100%;
+                                                     background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;">
+                    <div class="spinner"></div>
+                </div>
+                <iframe id="now-frame" src="Figure/plot_now_USD.html"></iframe>
             </div>
-            <iframe id="frame-now" src="plot_now_USD.html"></iframe>
         </div>
-
-        <!-- 新聞頁面 -->
-        <div id="page-news" class="page hidden">
-            <h2>CNN Business</h2>
-            <ul id="news-list"></ul>
+        <!-- CNN新聞頁 -->
+        <div id="page-news" class="hidden">
+            <h2>
+                <a href="https://edition.cnn.com/business" target="_blank" style="display:inline-block;vertical-align:middle;">
+                    <img src="https://cdn.cnn.com/cnn/.e1mo/img/4.0/logos/CNN_Business_CNNbusiness_red.svg" alt="CNN Business" style="height:2em;vertical-align:middle;">
+                </a>
+            </h2>
+            <ul id="news-list" style="padding-left:0;list-style:none;margin:0;"></ul>
         </div>
-
     </div>
-
     <script>
-        document.querySelectorAll('.nav button').forEach(tabBtn => {
-            tabBtn.onclick = () => {
-                document.querySelectorAll('.nav button').forEach(btn => btn.classList.remove('active'));
-                tabBtn.classList.add('active');
+        function loadNews() {
+            fetch("News/cnn_news.txt")
+                .then(response => {
+                    if (!response.ok) throw new Error("News file not found");
+                    return response.text();
+                })
+                .then(text => {
+                    const newsList = document.getElementById('news-list');
+                    newsList.innerHTML = "";
+                    const lines = text.split('\n').filter(line => line.trim());
+                    if (!lines.length) {
+                        newsList.innerHTML = "<li style='color:#888'>目前無新聞資料</li>";
+                        return;
+                    }
+                    lines.forEach((line, idx) => {
+                        const [title, url] = line.split('\t');
+                        if (!title || !url) return;
+                        const li = document.createElement('li');
+                        li.style.marginBottom = "1em";
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.textContent = `${idx + 1}. ${title}`;
+                        a.style.color = "#222";
+                        a.style.fontWeight = "bold";
+                        a.style.fontSize = "clamp(1.1rem, 2vw, 1.6rem)";
+                        a.style.textDecoration = "none";
+                        a.target = "_blank";
+                        a.onmouseover = () => a.style.color = "#19547b";
+                        a.onmouseout  = () => a.style.color = "#222";
+                        li.appendChild(a);
+                        newsList.appendChild(li);
+                    });
+                })
+                .catch(e => {
+                    document.getElementById('news-list').innerHTML =
+                        "<li style='color:#888'>新聞載入失敗或目前無資料。</li>";
+                });
+        }
 
-                const pages = ['history', 'now', 'news'];
-                pages.forEach(p => document.getElementById('page-' + p).classList.add('hidden'));
-                document.getElementById('page-' + tabBtn.id.split('-')[1]).classList.remove('hidden');
-            };
-        });
+        // --- tab 切換
+        const tabNews = document.getElementById('tab-news');
+        const tabRate = document.getElementById('tab-rate');
+        const tabNow  = document.getElementById('tab-now');
+        const pageNews = document.getElementById('page-news');
+        const pageRate = document.getElementById('page-rate');
+        const pageNow  = document.getElementById('page-now');
 
-        // 幣別切換
-        const historyBtns = document.querySelectorAll('#page-history .rate-btns button');
-        const nowBtns = document.querySelectorAll('#page-now .rate-btns button');
+        function showTab(which) {
+            // 移除全部 active/hidden
+            [tabNews, tabRate, tabNow].forEach(t => t.classList.remove('active'));
+            [pageNews, pageRate, pageNow].forEach(p => p.classList.add('hidden'));
+            if (which === 'news') {
+                tabNews.classList.add('active');
+                pageNews.classList.remove('hidden');
+                loadNews();
+            } else if (which === 'rate') {
+                tabRate.classList.add('active');
+                pageRate.classList.remove('hidden');
+            } else if (which === 'now') {
+                tabNow.classList.add('active');
+                pageNow.classList.remove('hidden');
+            }
+        }
+        tabNews.onclick = () => showTab('news');
+        tabRate.onclick = () => showTab('rate');
+        tabNow.onclick  = () => showTab('now');
 
-        historyBtns.forEach(btn => {
+        // --- 歷史匯率
+        const rateBtns = document.querySelectorAll('#page-rate .rate-btns button');
+        const rateFrame = document.getElementById('rate-frame');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const plotFiles = {
+            USD: "Figure/plot_USD.html",
+            EUR: "Figure/plot_EUR.html",
+            JPY: "Figure/plot_EUR.html",
+            CNY: "Figure/plot_CNY.html"
+        };
+        rateBtns.forEach(btn => {
             btn.onclick = () => {
-                historyBtns.forEach(b => b.classList.remove('active'));
+                rateBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById('frame-history').src = `plot_${btn.dataset.currency}.html`;
-            };
+                let cur = btn.getAttribute('data-currency');
+                loadingSpinner.style.display = 'flex';
+                if (rateFrame.src !== plotFiles[cur]) {
+                    rateFrame.src = plotFiles[cur];
+                } else {
+                    // 強制刷新
+                    rateFrame.src = '';
+                    setTimeout(() => { rateFrame.src = plotFiles[cur]; }, 50);
+                }
+            }
         });
+        rateFrame.onload = () => {
+            loadingSpinner.style.display = 'none';
+            setTimeout(() => {
+                if (rateFrame.contentWindow.Plotly) {
+                    const plotDiv = rateFrame.contentWindow.document.querySelector('.js-plotly-plot');
+                    if (plotDiv) rateFrame.contentWindow.Plotly.Plots.resize(plotDiv);
+                }
+            }, 300);
+        };
 
+        // --- 即時匯率
+        const nowBtns = document.querySelectorAll('#page-now .rate-btns button');
+        const nowFrame = document.getElementById('now-frame');
+        const nowLoading = document.getElementById('now-loading-spinner');
+        const plotNowFiles = {
+            USD: "Figure/plot_now_USD.html",
+            EUR: "Figure/plot_now_EUR.html",
+            JPY: "Figure/plot_now_JPY.html",
+            CNY: "Figure/plot_now_CNY.html"
+        };
         nowBtns.forEach(btn => {
             btn.onclick = () => {
                 nowBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById('frame-now').src = `plot_now_${btn.dataset.currency}.html`;
-            };
+                let cur = btn.getAttribute('data-currency');
+                nowLoading.style.display = 'flex';
+                if (nowFrame.src !== plotNowFiles[cur]) {
+                    nowFrame.src = plotNowFiles[cur];
+                } else {
+                    nowFrame.src = '';
+                    setTimeout(() => { nowFrame.src = plotNowFiles[cur]; }, 50);
+                }
+            }
         });
+        nowFrame.onload = () => {
+            nowLoading.style.display = 'none';
+            setTimeout(() => {
+                if (nowFrame.contentWindow.Plotly) {
+                    const plotDiv = nowFrame.contentWindow.document.querySelector('.js-plotly-plot');
+                    if (plotDiv) nowFrame.contentWindow.Plotly.Plots.resize(plotDiv);
+                }
+            }, 300);
+        };
 
-        // CNN Business
-        fetch('cnn_news.txt')
-        .then(resp => resp.text())
-        .then(text => {
-            const lines = text.trim().split('\n');
-            let html = '';
-            lines.forEach((line,i) => {
-                const [title, url] = line.split(/\s+(https?:\/\/\S+)/);
-                html += `<li><a href="${url}" target="_blank">${i+1}. ${title}</a></li>`;
-            });
-            document.getElementById('news-list').innerHTML = html;
+        // --- 初始化
+        window.addEventListener('DOMContentLoaded', () => {
+            // 預設顯示歷史匯率
+            showTab('rate');
+            // 預設快速切換（避免 plotly first load 沒 resize 好）
+            loadingSpinner.style.display = 'flex';
+            rateFrame.src = plotFiles['EUR'];
+            setTimeout(() => {
+                rateFrame.src = plotFiles['USD'];
+            }, 150);
+            loadNews();
         });
     </script>
 </body>
