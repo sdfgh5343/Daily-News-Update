@@ -144,7 +144,7 @@
     </div>
     <script>
         function loadNews() {
-            fetch("cnn_news.txt")
+            fetch("News/cnn_news.txt")
                 .then(response => {
                     if (!response.ok) throw new Error("News file not found");
                     return response.text();
@@ -209,10 +209,10 @@
         }
 
         const plotFiles = {
-            USD: "plot_USD.html",
-            EUR: "plot_EUR.html",
-            JPY: "plot_JPY.html",
-            CNY: "plot_CNY.html"
+            USD: "Figure/plot_USD.html",
+            EUR: "Figure/plot_EUR.html",
+            JPY: "Figure/plot_JPY.html",
+            CNY: "Figure/plot_CNY.html"
         };
 
         // 幣種切換顯示 loading，iframe 載入後關閉
