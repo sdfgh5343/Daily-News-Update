@@ -107,29 +107,29 @@ def plot_currency(currency, title="Exchange Rate History"):
 
 
     fig = go.Figure(data=traces, layout=layout)
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="right",
-                x=0.5, y=1.13, xanchor="center", yanchor="bottom",
-                bgcolor='#eaf4fa',                   # 跟 rangeslider 一樣的淡藍色
-                bordercolor='#bbb',
-                borderwidth=1,
-                font=dict(size=18, color='#19547b', family='Segoe UI, Arial, sans-serif'),
-                pad=dict(l=18, r=18, t=12, b=12),    # 內邊距更大更厚
-                buttons=[
-                    dict(label="All", method="update",
-                        args=[{"visible": [True]*8}]),
-                    dict(label="Cash", method="update",
-                        args=[{"visible": [True, True, True, True, False, False, False, False]}]),
-                    dict(label="Spot", method="update",
-                        args=[{"visible": [False, False, False, False, True, True, True, True]}])
-                ],
-                showactive=True,
-            )
-        ]
-    )
+    # fig.update_layout(
+    #     updatemenus=[
+    #         dict(
+    #             type="buttons",
+    #             direction="right",
+    #             x=0.5, y=1.13, xanchor="center", yanchor="bottom",
+    #             bgcolor='#eaf4fa',                   # 跟 rangeslider 一樣的淡藍色
+    #             bordercolor='#bbb',
+    #             borderwidth=1,
+    #             font=dict(size=18, color='#19547b', family='Segoe UI, Arial, sans-serif'),
+    #             pad=dict(l=18, r=18, t=12, b=12),    # 內邊距更大更厚
+    #             buttons=[
+    #                 dict(label="All", method="update",
+    #                     args=[{"visible": [True]*8}]),
+    #                 dict(label="Cash", method="update",
+    #                     args=[{"visible": [True, True, True, True, False, False, False, False]}]),
+    #                 dict(label="Spot", method="update",
+    #                     args=[{"visible": [False, False, False, False, True, True, True, True]}])
+    #             ],
+    #             showactive=True,
+    #         )
+    #     ]
+    # )
     fig.write_html(f"../Figure/plot_{currency}.html", full_html=True)
     with open(f"../Figure/plot_{currency}.html", "a", encoding="utf8") as f:
         f.write("""
@@ -245,44 +245,44 @@ def plot_now(currency):
 
 
     fig = go.Figure(data=traces, layout=layout)
-    fig.update_layout(
-        updatemenus=[
-            dict(
-                type="buttons",
-                direction="right",
-                x=0.5, y=1.13, xanchor="center", yanchor="bottom",
-                bgcolor='#eaf4fa',                   # 跟 rangeslider 一樣的淡藍色
-                bordercolor='#bbb',
-                borderwidth=1,
-                font=dict(size=18, color='#19547b', family='Segoe UI, Arial, sans-serif'),
-                pad=dict(l=18, r=18, t=12, b=12),    # 內邊距更大更厚
-                buttons=[
-                    dict(label="All", method="update",
-                        args=[{"visible": [True]*8}]),
-                    dict(label="Cash", method="update",
-                        args=[{"visible": [True, True, True, True, False, False, False, False]}]),
-                    dict(label="Spot", method="update",
-                        args=[{"visible": [False, False, False, False, True, True, True, True]}])
-                ],
-                showactive=True,
-            )
-        ]
-    )
+    # fig.update_layout(
+    #     updatemenus=[
+    #         dict(
+    #             type="buttons",
+    #             direction="right",
+    #             x=0.5, y=1.13, xanchor="center", yanchor="bottom",
+    #             bgcolor='#eaf4fa',                   # 跟 rangeslider 一樣的淡藍色
+    #             bordercolor='#bbb',
+    #             borderwidth=1,
+    #             font=dict(size=18, color='#19547b', family='Segoe UI, Arial, sans-serif'),
+    #             pad=dict(l=18, r=18, t=12, b=12),    # 內邊距更大更厚
+    #             buttons=[
+    #                 dict(label="All", method="update",
+    #                     args=[{"visible": [True]*8}]),
+    #                 dict(label="Cash", method="update",
+    #                     args=[{"visible": [True, True, True, True, False, False, False, False]}]),
+    #                 dict(label="Spot", method="update",
+    #                     args=[{"visible": [False, False, False, False, True, True, True, True]}])
+    #             ],
+    #             showactive=True,
+    #         )
+    #     ]
+    # )
     fig.write_html(f"../Figure/plot_now_{currency}.html", full_html=True)
-    with open(f"../Figure/plot_now_{currency}.html", "a", encoding="utf8") as f:
-        f.write("""
-    <script>
-    window.addEventListener('resize', function() {
-        Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
-    });
-    window.addEventListener('DOMContentLoaded', function() {
-        Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
-    });
-    setTimeout(function(){
-        Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
-    }, 200);
-    </script>
-    """)
+    # with open(f"../Figure/plot_now_{currency}.html", "a", encoding="utf8") as f:
+    #     f.write("""
+    # <script>
+    # window.addEventListener('resize', function() {
+    #     Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
+    # });
+    # window.addEventListener('DOMContentLoaded', function() {
+    #     Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
+    # });
+    # setTimeout(function(){
+    #     Plotly.Plots.resize(document.querySelector('.js-plotly-plot'));
+    # }, 200);
+    # </script>
+    # """)
 
 if __name__ =="__main__":
     for currency in ["USD","JPY","EUR","CNY"]:

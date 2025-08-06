@@ -20,9 +20,9 @@
             flex-direction: column;
             align-items: stretch;
         }
-        #page-news, #page-rate {
+        #page-news, #page-rate, #page-now {
             width: 100%;
-            height: 100%;
+            height: 60%;
             box-sizing: border-box;
             padding: 32px 24px;
         }
@@ -47,8 +47,8 @@
         .hidden { display: none; }
         #rate-content, #now-content {
             width: 100%;
-            height: calc(100vh - 70px - 32px - 50px); /* 視窗高-導航列-上padding-按鈕高度 */
-            min-height: 400px;
+            height: calc(80vh - 70px - 32px - 50px); /* 視窗高-導航列-上padding-按鈕高度 */
+            min-height: 750px;
             background: #f5f7fa;
             border-radius: 12px;
             overflow: hidden;
@@ -65,7 +65,7 @@
         }
         @media (max-width: 800px) {
             .container { padding: 0; }
-            #page-news, #page-rate { padding: 12px 4px; }
+            #page-news, #page-rate, #page-now { padding: 12px 4px; }
             #rate-content { min-height: 250px; }
         }
 
@@ -115,19 +115,19 @@
             </div>
         </div>
         <!-- 即時匯率頁 -->
-        <div id="page-now" class="page hidden">
+        <div id="page-now" class="hidden">
             <div class="rate-btns">
-                <button class="active" data-currency="USD" data-type="now">USD</button>
-                <button data-currency="EUR" data-type="now">EUR</button>
-                <button data-currency="JPY" data-type="now">JPY</button>
-                <button data-currency="CNY" data-type="now">CNY</button>
+                <button class="active" data-currency="USD">USD</button>
+                <button data-currency="EUR">EUR</button>
+                <button data-currency="JPY">JPY</button>
+                <button data-currency="CNY">CNY</button>
             </div>
             <div id="now-content">
                 <div id="now-loading-spinner" style="display:none;position:absolute;z-index:2;left:0;top:0;width:100%;height:100%;
                                                      background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;">
                     <div class="spinner"></div>
                 </div>
-                <iframe id="now-frame" src="Figure/plot_now_USD.html"></iframe>
+                <iframe id="now-frame" src="Figure/plot_now_USD.html" onload="resizeNowFrame()"></iframe>
             </div>
         </div>
         <!-- CNN新聞頁 -->
@@ -206,7 +206,36 @@
         }
         tabNews.onclick = () => showTab('news');
         tabRate.onclick = () => showTab('rate');
-        tabNow.onclick  = () => showTab('now');
+        tabNow.onclick = () => {
+            tabNow.classList.add('active');
+            tabRate.classList.remove('active');
+            pageNow.classList.remove('hidden');
+            pageRate.classList.add('hidden');
+            pageNews.classList.add('hidden');
+            nowLoadingSpinner.style.display = 'flex';
+
+            nowFrame.src = nowPlotFiles['EUR'];    // 先換到其他一張
+            setTimeout(() => {
+                nowFrame.src = nowPlotFiles['USD']; // 再換回 USD
+            }, 150);
+
+            // 監聽 iframe 載入事件
+            nowFrame.onload = () => {
+                nowLoadingSpinner.style.display = 'none';
+                setTimeout(() => {
+                    if (nowFrame.contentWindow.Plotly) {
+                        const plotDiv = nowFrame.contentWindow.document.querySelector('.js-plotly-plot');
+                        if (plotDiv) nowFrame.contentWindow.Plotly.Plots.resize(plotDiv);
+                    }
+                }, 300); // 稍微保守一點，等內部 JS 完全執行
+            };
+            nowLoadingSpinner.style.display = 'flex';
+            nowFrame.src = nowPlotFiles['EUR'] + '?t=' + Date.now();
+            setTimeout(() => {
+                nowFrame.src = nowPlotFiles['USD'] + '?t=' + Date.now();
+            }, 150);
+        };
+
 
         // --- 歷史匯率
         const rateBtns = document.querySelectorAll('#page-rate .rate-btns button');
@@ -215,7 +244,7 @@
         const plotFiles = {
             USD: "Figure/plot_USD.html",
             EUR: "Figure/plot_EUR.html",
-            JPY: "Figure/plot_EUR.html",
+            JPY: "Figure/plot_JPY.html",
             CNY: "Figure/plot_CNY.html"
         };
         rateBtns.forEach(btn => {
@@ -276,7 +305,36 @@
                 }
             }, 300);
         };
+        window.addEventListener('DOMContentLoaded', () => {
+            // 預先載入所有即時匯率的 plot html
+            ['USD', 'EUR', 'JPY', 'CNY'].forEach(cur => {
+                const tempFrame = document.createElement('iframe');
+                tempFrame.src = nowPlotFiles[cur];
+                tempFrame.style.display = 'none';
+                document.body.appendChild(tempFrame);
+                // 載完就自動移除（或保留在 body，不影響）
+                tempFrame.onload = () => { tempFrame.remove(); };
+            });
+        });
 
+
+
+        document.getElementById('tab-now').onclick = function() {
+            tabNow.classList.add('active');
+            tabRate.classList.remove('active');
+            tabNews.classList.remove('active');
+            pageNow.classList.remove('hidden');
+            pageRate.classList.add('hidden');
+            pageNews.classList.add('hidden');
+            // 等待畫面顯示再 resize
+            setTimeout(() => {
+                const nowFrame = document.getElementById('now-frame');
+                if (nowFrame && nowFrame.contentWindow && nowFrame.contentWindow.Plotly) {
+                    const plotDiv = nowFrame.contentWindow.document.querySelector('.js-plotly-plot');
+                    if (plotDiv) nowFrame.contentWindow.Plotly.Plots.resize(plotDiv);
+                }
+            }, 400);
+        };
         // --- 初始化
         window.addEventListener('DOMContentLoaded', () => {
             // 預設顯示歷史匯率
