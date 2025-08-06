@@ -2,3 +2,5 @@ remote: Invalid username or token. Password authentication is not supported for 
 fatal: Authentication failed for 'https://github.com/sdfgh5343/Daily-News-Update.git/'
 remote: Invalid username or token. Password authentication is not supported for Git operations.
 fatal: Authentication failed for 'https://github.com/sdfgh5343/Daily-News-Update.git/'
+To github.com:sdfgh5343/Daily-News-Update.git
+   acd0f02..1f51a34  main -> main
