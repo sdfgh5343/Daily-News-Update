@@ -229,11 +229,11 @@
                     }
                 }, 300); // 稍微保守一點，等內部 JS 完全執行
             };
-            nowLoadingSpinner.style.display = 'flex';
-            nowFrame.src = nowPlotFiles['EUR'] + '?t=' + Date.now();
-            setTimeout(() => {
-                nowFrame.src = nowPlotFiles['USD'] + '?t=' + Date.now();
-            }, 150);
+            // nowLoadingSpinner.style.display = 'flex';
+            // nowFrame.src = nowPlotFiles['EUR'] + '?t=' + Date.now();
+            // setTimeout(() => {
+            //     nowFrame.src = nowPlotFiles['USD'] + '?t=' + Date.now();
+            // }, 150);
         };
 
 
@@ -305,17 +305,17 @@
                 }
             }, 300);
         };
-        window.addEventListener('DOMContentLoaded', () => {
-            // 預先載入所有即時匯率的 plot html
-            ['USD', 'EUR', 'JPY', 'CNY'].forEach(cur => {
-                const tempFrame = document.createElement('iframe');
-                tempFrame.src = nowPlotFiles[cur];
-                tempFrame.style.display = 'none';
-                document.body.appendChild(tempFrame);
-                // 載完就自動移除（或保留在 body，不影響）
-                tempFrame.onload = () => { tempFrame.remove(); };
-            });
-        });
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     // 預先載入所有即時匯率的 plot html
+        //     ['USD', 'EUR', 'JPY', 'CNY'].forEach(cur => {
+        //         const tempFrame = document.createElement('iframe');
+        //         tempFrame.src = nowPlotFiles[cur];
+        //         tempFrame.style.display = 'none';
+        //         document.body.appendChild(tempFrame);
+        //         // 載完就自動移除（或保留在 body，不影響）
+        //         tempFrame.onload = () => { tempFrame.remove(); };
+        //     });
+        // });
 
 
 
