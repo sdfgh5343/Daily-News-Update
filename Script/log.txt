@@ -1,0 +1,3 @@
+已儲存 10 則新聞到 ../News/cnn_news.txt
+已儲存 10 則新聞到 ../News/cnn_news.txt
+已儲存 10 則新聞到 ../News/cnn_news.txt
