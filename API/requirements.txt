@@ -1,0 +1,15 @@
+# ---------- 爬蟲/資料擷取 ----------
+requests
+beautifulsoup4
+
+# ---------- 資料處理 ----------
+numpy
+pandas
+scipy
+
+# ---------- 繪圖 ----------
+matplotlib
+
+# ---------- PDF 產生與加密（如有需求再加） ----------
+reportlab
+PyPDF2
