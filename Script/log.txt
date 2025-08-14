@@ -73,3 +73,4 @@ CNY_Spot: 2025/08/13 16:00 Existing
 已儲存 10 則新聞到 ../News/cnn_news.txt
 已儲存 10 則新聞到 ../News/cnn_news.txt
 已儲存 10 則新聞到 ../News/cnn_news.txt
+已儲存 10 則新聞到 ../News/cnn_news.txt
