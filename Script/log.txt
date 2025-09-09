@@ -1646,3 +1646,12 @@ New data：JPY_Spot 2025/09/09 16:02
 New data：EUR_Spot 2025/09/09 16:02
 New data：CNY_Spot 2025/09/09 16:02
 已儲存 0 則新聞到 ../News/cnn_news.txt
+USD_Cash: 2025/09/09 16:02 Existing
+JPY_Cash: 2025/09/09 16:02 Existing
+EUR_Cash: 2025/09/09 16:02 Existing
+CNY_Cash: 2025/09/09 16:02 Existing
+USD_Spot: 2025/09/09 16:02 Existing
+JPY_Spot: 2025/09/09 16:02 Existing
+EUR_Spot: 2025/09/09 16:02 Existing
+CNY_Spot: 2025/09/09 16:02 Existing
+已儲存 0 則新聞到 ../News/cnn_news.txt
