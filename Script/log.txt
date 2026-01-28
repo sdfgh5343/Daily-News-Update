@@ -17997,3 +17997,12 @@ Traceback (most recent call last):
     raise ConnectionError(e, request=request)
 requests.exceptions.ConnectionError: HTTPSConnectionPool(host='rate.bot.com.tw', port=443): Max retries exceeded with url: /xrt/all/day (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f5dcfbec520>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
 已儲存 0 則新聞到 ../News/cnn_news.txt
+New data：USD_Cash 2026/01/28 16:01
+New data：JPY_Cash 2026/01/28 16:01
+New data：EUR_Cash 2026/01/28 16:01
+New data：CNY_Cash 2026/01/28 16:01
+New data：USD_Spot 2026/01/28 16:01
+New data：JPY_Spot 2026/01/28 16:01
+New data：EUR_Spot 2026/01/28 16:01
+New data：CNY_Spot 2026/01/28 16:01
+已儲存 0 則新聞到 ../News/cnn_news.txt
