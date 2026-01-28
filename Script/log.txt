@@ -17996,3 +17996,4 @@ Traceback (most recent call last):
   File "/usr/lib/python3.8/site-packages/requests/adapters.py", line 565, in send
     raise ConnectionError(e, request=request)
 requests.exceptions.ConnectionError: HTTPSConnectionPool(host='rate.bot.com.tw', port=443): Max retries exceeded with url: /xrt/all/day (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f5dcfbec520>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+已儲存 0 則新聞到 ../News/cnn_news.txt
