@@ -220,6 +220,7 @@ def plot_now(currency):
         hovermode='x unified',
         plot_bgcolor="#f5f7fa",
         margin=dict(l=10, r=10, t=10, b=10)
+        showlegend=False,
     )
 
     fig = go.Figure(data=traces, layout=layout)

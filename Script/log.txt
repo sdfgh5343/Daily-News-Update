@@ -18058,3 +18058,10 @@ Traceback (most recent call last):
   File "main.py", line 38, in <module>
     plot_currency(currency)
 TypeError: plot_currency() missing 1 required positional argument: 'currency'
+Traceback (most recent call last):
+  File "main.py", line 5, in <module>
+    from Plot_Historical_Price import plot_currency, plot_now
+  File "/volume2/homes/administer/Daily-News-Update/Script/Plot_Historical_Price.py", line 223
+    showlegend=False,
+    ^
+SyntaxError: invalid syntax
