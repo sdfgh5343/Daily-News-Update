@@ -191,11 +191,13 @@ def plot_now(currency):
     layout = go.Layout(
         xaxis=dict(
             title='Date',
-            range=[starttime, endtime],      # 只影響初始視窗範圍
+            range=[starttime, endtime],
             showgrid=True,
             gridcolor='#ddd',
-            tickformat='%Y-%m',              # x軸標籤顯示年月
-            dtick='M1',                      # 一個月一格
+            tickformat='%Y-%m',
+            dtick='M1',
+            hoverformat='%Y-%m-%d %H:%M:%S',
+
             rangeslider=dict(
                 visible=True,
                 thickness=0.12,
@@ -218,8 +220,14 @@ def plot_now(currency):
             gridcolor='#ddd'
         ),
         hovermode='x unified',
+        hoverlabel=dict(
+            bgcolor="white",
+            font_size=13,
+            font_family="Segoe UI"
+        ),
+
         plot_bgcolor="#f5f7fa",
-        margin=dict(l=10, r=10, t=10, b=10)
+        margin=dict(l=10, r=10, t=10, b=10),
         showlegend=False,
     )
 
