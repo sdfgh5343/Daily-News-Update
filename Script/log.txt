@@ -18053,3 +18053,8 @@ Traceback (most recent call last):
   File "main.py", line 38, in <module>
     plot_currency(currency)
 TypeError: plot_currency() missing 1 required positional argument: 'currency'
+已儲存 0 則新聞到 ../News/cnn_news.txt
+Traceback (most recent call last):
+  File "main.py", line 38, in <module>
+    plot_currency(currency)
+TypeError: plot_currency() missing 1 required positional argument: 'currency'

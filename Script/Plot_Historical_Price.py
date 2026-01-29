@@ -148,46 +148,43 @@ def plot_now(currency):
             ),
             hovertemplate=None, hoverinfo='skip'
         ))
-        # ===== 趨勢線（EMA）：只畫，不參與 hover =====
-        df["EMA_Buy"] = df["Buying"].ewm(span=5).mean()
+
+        df['MA20'] = df['Selling'].rolling(3).mean()
+        # ===== 線（EMA） =====
+        df['EMA_Buy'] = df['Buying'].ewm(span=3).mean()
         traces.append(go.Scatter(
-            x=df["Date"], y=df["EMA_Buy"],
-            mode="lines",
-            name=f"{t} Buying",
-            line=dict(width=3, color=color_map[f"{t}_Buy"], dash=line_map["Buy"]),
-            hoverinfo="skip"  # ✅ 線不顯示 hover
+            x=df['Date'], y=df['EMA_Buy'],
+            mode='lines',
+            name='Cash Buying',
+            line=dict(width=3, color=color_map["Cash_Buy"], dash=line_map['Buy']),
+            hovertemplate=None, hoverinfo='skip'
         ))
 
-        df["EMA_Sell"] = df["Selling"].ewm(span=5).mean()
+        df['EMA_Sell'] = df['Selling'].ewm(span=3).mean()
         traces.append(go.Scatter(
-            x=df["Date"], y=df["EMA_Sell"],
-            mode="lines",
-            name=f"{t} Selling",
-            line=dict(width=3, color=color_map[f"{t}_Sell"], dash=line_map["Sell"]),
-            hoverinfo="skip"  # ✅ 線不顯示 hover
+            x=df['Date'], y=df['EMA_Sell'],
+            mode='lines',
+            name='Cash Selling',
+            line=dict(width=3, color=color_map["Cash_Sell"], dash=line_map['Sell']),
+            hovertemplate=None, hoverinfo='skip'
         ))
 
-        # ===== 隱藏點：不顯示，但承載 hover（顯示原始值）=====
-        # 買入點（隱形）
+        # ===== Scatter(Original data) =====
         traces.append(go.Scatter(
-            x=df["Date"], y=df["Buying"],
-            mode="markers",
-            name=f"{t} Buying (raw)",
+            x=df['Date'], y=df['Buying'],
+            mode='markers',
+            name='Cash Buying',
             showlegend=False,
-            marker=dict(size=10, color="rgba(0,0,0,0)"),  # ✅ 點透明但可 hover
-            customdata=df["DateStr"],
-            hovertemplate=f"{t} <br>   Buying: %{{y:.4f}}<extra></extra>"
+            marker=dict(size=6, color='rgba(26, 82,118,1.0)'),
+            hovertemplate='Buying: %{y:.4f}<extra></extra>'
         ))
-
-        # 賣出點（隱形）
         traces.append(go.Scatter(
-            x=df["Date"], y=df["Selling"],
-            mode="markers",
-            name=f"{t} Selling (raw)",
+            x=df['Date'], y=df['Selling'],
+            mode='markers',
+            name='Cash Selling',
             showlegend=False,
-            marker=dict(size=10, color="rgba(0,0,0,0)"),
-            customdata=df["DateStr"],
-            hovertemplate="   Selling: %{y:.4f}<extra></extra>"
+            marker=dict(size=6, color='rgba(148, 49, 38,1.0)'),
+            hovertemplate='Selling: %{y:.4f}<extra></extra>'
         ))
     endtime   = df.loc[df.index.stop-1,"Date"]+pd.Timedelta(hours=24)
     starttime = endtime-pd.Timedelta(hours=365*24)
