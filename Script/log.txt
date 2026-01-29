@@ -18126,3 +18126,4 @@ Traceback (most recent call last):
   File "/usr/lib/python3.8/pathlib.py", line 1078, in _opener
     return self._accessor.open(self, flags, mode)
 NotADirectoryError: [Errno 20] Not a directory: '../Figure/plot_now_USD.html/plot_now_USD.html'
+已儲存 0 則新聞到 ../News/cnn_news.txt

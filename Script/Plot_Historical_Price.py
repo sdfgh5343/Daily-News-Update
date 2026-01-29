@@ -334,7 +334,7 @@ def plot_now(csv_file_path,currency,
     fig = go.Figure(data=traces, layout=layout)
 
     if show_html: fig.show()
-    if save_html: fig.write_html(f"{save_directory}/plot_now_{currency}.html", full_html=True)
+    if save_html: fig.write_html(save_directory, full_html=True)
 
     return fig
 
