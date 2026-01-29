@@ -130,7 +130,7 @@ def plot_now(currency):
         "Sell": 'dashdot',
     }
     for t in ['Cash']:
-        csv_file = f'../Data/history/{currency}.csv'
+        csv_file = f'Data/history/Historical_{currency}.csv'
         df = pd.read_csv(csv_file)
         df.columns = ['Date',"Buying","Buying.1","Selling","Selling.1"]
         df['Date'] = pd.to_datetime(df['Date'])
@@ -232,9 +232,13 @@ def plot_now(currency):
     )
 
     fig = go.Figure(data=traces, layout=layout)
+    # fig.show()
     fig.write_html(f"../Figure/plot_now_{currency}.html", full_html=True)
 
 if __name__ =="__main__":
+    # for currency in ["USD","JPY","EUR","CNY"]:
+    #     csv_file = f'../Data/Historical Download/{currency}_{t}_Historical.csv'
+    #     plot_currency(csv_file, currency, title=f"{currency} Cash/Spot Buying/Selling Rate")
     for currency in ["USD","JPY","EUR","CNY"]:
-        csv_file = f'../Data/Historical Download/{currency}_{t}_Historical.csv'
-        plot_currency(csv_file, currency, title=f"{currency} Cash/Spot Buying/Selling Rate")
+        plot_now(currency)
+    

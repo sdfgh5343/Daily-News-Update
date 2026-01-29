@@ -18070,3 +18070,20 @@ Traceback (most recent call last):
   File "main.py", line 38, in <module>
     plot_currency(currency)
 TypeError: plot_currency() missing 1 required positional argument: 'currency'
+已儲存 0 則新聞到 ../News/cnn_news.txt
+Traceback (most recent call last):
+  File "main.py", line 37, in <module>
+    plot_now(currency)
+  File "/volume2/homes/administer/Daily-News-Update/Script/Plot_Historical_Price.py", line 134, in plot_now
+    df = pd.read_csv(csv_file)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/io/common.py", line 859, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'Data/history/Historical_USD.csv'
