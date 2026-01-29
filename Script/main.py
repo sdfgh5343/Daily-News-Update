@@ -35,5 +35,10 @@ if __name__ == "__main__":
     
     for currency in ["USD","JPY","EUR","CNY"]:
         plot_now(currency)
-        plot_currency(currency)
+
+        plot_currency(csv_file_path =f'../Data/history/{currency}.csv',
+                      currency = currency,
+                      show_html = False,
+                      save_html = True,
+                      save_directory = f"../Figure/plot_now_{currency}.html")
     

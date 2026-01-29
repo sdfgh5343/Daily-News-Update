@@ -117,77 +117,176 @@ def plot_currency(path, currency, title="Exchange Rate History"):
     """)
 
 
-def plot_now(currency):
+# def plot_now(currency):
+#     traces = []
+#     color_map = {
+#         "Cash_Buy": 'rgba( 36,113,163,0.7)',
+#         "Cash_Sell": 'rgba(203, 67, 53,0.7)',
+#         "Spot_Buy": 'rgba(255,0,0,0.7)',
+#         "Spot_Sell": 'rgba(255,0,0,0.7)',
+#     }
+#     line_map = {
+#         "Buy": 'solid',
+#         "Sell": 'dashdot',
+#     }
+#     for t in ['Cash']:
+#         csv_file = f'../Data/history/{currency}.csv'
+#         df = pd.read_csv(csv_file)
+#         df.columns = ['Date',"Buying","Buying.1","Selling","Selling.1"]
+#         df['Date'] = pd.to_datetime(df['Date'])
+#         df['DateStr'] = df['Date'].dt.strftime('%Y/%m/%d %H:%M:%S')
+
+#         df['MA20'] = df['Buying'].rolling(3).mean()
+#         df['EMA20'] = df['Buying'].ewm(span=3).mean()
+#         traces.append(go.Scatter(
+#             x=df['Date'], y=df['EMA20'],
+#             mode='lines', name=f'{t} Buying',
+#             line=dict(
+#                 width=3,
+#                 color=color_map[f"{t}_Buy"],
+#                 dash=line_map['Buy']
+#             ),
+#             hovertemplate=None, hoverinfo='skip'
+#         ))
+
+#         df['MA20'] = df['Selling'].rolling(3).mean()
+#         # ===== 線（EMA） =====
+#         df['EMA_Buy'] = df['Buying'].ewm(span=3).mean()
+#         traces.append(go.Scatter(
+#             x=df['Date'], y=df['EMA_Buy'],
+#             mode='lines',
+#             name='Cash Buying',
+#             line=dict(width=3, color=color_map["Cash_Buy"], dash=line_map['Buy']),
+#             hovertemplate=None, hoverinfo='skip'
+#         ))
+
+#         df['EMA_Sell'] = df['Selling'].ewm(span=3).mean()
+#         traces.append(go.Scatter(
+#             x=df['Date'], y=df['EMA_Sell'],
+#             mode='lines',
+#             name='Cash Selling',
+#             line=dict(width=3, color=color_map["Cash_Sell"], dash=line_map['Sell']),
+#             hovertemplate=None, hoverinfo='skip'
+#         ))
+
+#         # ===== Scatter(Original data) =====
+#         traces.append(go.Scatter(
+#             x=df['Date'], y=df['Buying'],
+#             mode='markers',
+#             name='Cash Buying',
+#             showlegend=False,
+#             marker=dict(size=6, color='rgba(26, 82,118,1.0)'),
+#             hovertemplate='Buying: %{y:.4f}<extra></extra>'
+#         ))
+#         traces.append(go.Scatter(
+#             x=df['Date'], y=df['Selling'],
+#             mode='markers',
+#             name='Cash Selling',
+#             showlegend=False,
+#             marker=dict(size=6, color='rgba(148, 49, 38,1.0)'),
+#             hovertemplate='Selling: %{y:.4f}<extra></extra>'
+#         ))
+#     endtime   = df.loc[df.index.stop-1,"Date"]+pd.Timedelta(hours=24)
+#     starttime = endtime-pd.Timedelta(hours=365*24)
+#     layout = go.Layout(
+#         xaxis=dict(
+#             title='Date',
+#             range=[starttime, endtime],
+#             showgrid=True,
+#             gridcolor='#ddd',
+#             tickformat='%Y-%m',
+#             dtick='M1',
+#             hoverformat='%Y-%m-%d %H:%M:%S',
+
+#             rangeslider=dict(
+#                 visible=True,
+#                 thickness=0.12,
+#                 bgcolor="#f5f7fa",
+#                 bordercolor="#bbb",
+#                 borderwidth=1
+#             ),
+#             rangeselector=dict(
+#                 buttons=list([
+#                                 dict(count=1, label="1Y", step="year", stepmode="backward"),
+#                                 dict(count=6, label="6M", step="month", stepmode="backward"),
+#                                 dict(count=3, label="3M", step="month", stepmode="backward"),
+#                                 dict(step="all")
+#                             ])
+#             ),
+#         ),
+#         yaxis=dict(
+#                         title='Rate',
+#                         showgrid=True,
+#                         gridcolor='#ddd'
+#                     ),
+#         hovermode='x unified',
+#         hoverlabel=dict(
+#                             bgcolor="white",
+#                             font_size=13,
+#                             font_family="Segoe UI"
+#                         ),
+
+#         plot_bgcolor="#f5f7fa",
+#         margin=dict(l=10, r=10, t=10, b=10),
+#         showlegend=False,
+#     )
+
+#     fig = go.Figure(data=traces, layout=layout)
+#     fig.write_html(f"../Figure/plot_now_{currency}.html", full_html=True)
+
+def plot_now(csv_file_path,currency,
+             show_html: bool = False,
+             save_html: bool = False,
+             save_directory = None):
     traces = []
-    color_map = {
-        "Cash_Buy": 'rgba( 36,113,163,0.7)',
-        "Cash_Sell": 'rgba(203, 67, 53,0.7)',
-        "Spot_Buy": 'rgba(255,0,0,0.7)',
-        "Spot_Sell": 'rgba(255,0,0,0.7)',
-    }
-    line_map = {
-        "Buy": 'solid',
-        "Sell": 'dashdot',
-    }
-    for t in ['Cash']:
-        csv_file = f'Data/history/Historical_{currency}.csv'
-        df = pd.read_csv(csv_file)
-        df.columns = ['Date',"Buying","Buying.1","Selling","Selling.1"]
-        df['Date'] = pd.to_datetime(df['Date'])
-        df['DateStr'] = df['Date'].dt.strftime('%Y/%m/%d %H:%M:%S')
+    color_map = {"Cash_Buy": 'rgba( 36,113,163,0.7)',
+                 "Cash_Sell": 'rgba(203, 67, 53,0.7)',}
+    line_map = {"Buy": 'solid', "Sell": 'dashdot'}
 
-        df['MA20'] = df['Buying'].rolling(3).mean()
-        df['EMA20'] = df['Buying'].ewm(span=3).mean()
-        traces.append(go.Scatter(
-            x=df['Date'], y=df['EMA20'],
-            mode='lines', name=f'{t} Buying',
-            line=dict(
-                width=3,
-                color=color_map[f"{t}_Buy"],
-                dash=line_map['Buy']
-            ),
-            hovertemplate=None, hoverinfo='skip'
-        ))
+    df = pd.read_csv(csv_file_path)
+    df.columns = ['Date', "Buying", "Buying.1", "Selling", "Selling.1"]
+    df['Date'] = pd.to_datetime(df['Date'])
 
-        df['MA20'] = df['Selling'].rolling(3).mean()
-        # ===== 線（EMA） =====
-        df['EMA_Buy'] = df['Buying'].ewm(span=3).mean()
-        traces.append(go.Scatter(
-            x=df['Date'], y=df['EMA_Buy'],
-            mode='lines',
-            name='Cash Buying',
-            line=dict(width=3, color=color_map["Cash_Buy"], dash=line_map['Buy']),
-            hovertemplate=None, hoverinfo='skip'
-        ))
+    # ===== 線（EMA） =====
+    df['EMA_Buy'] = df['Buying'].ewm(span=3).mean()
+    traces.append(go.Scatter(
+        x=df['Date'], y=df['EMA_Buy'],
+        mode='lines',
+        name='Cash Buying',
+        line=dict(width=3, color=color_map["Cash_Buy"], dash=line_map['Buy']),
+        hovertemplate=None, hoverinfo='skip'
+    ))
 
-        df['EMA_Sell'] = df['Selling'].ewm(span=3).mean()
-        traces.append(go.Scatter(
-            x=df['Date'], y=df['EMA_Sell'],
-            mode='lines',
-            name='Cash Selling',
-            line=dict(width=3, color=color_map["Cash_Sell"], dash=line_map['Sell']),
-            hovertemplate=None, hoverinfo='skip'
-        ))
+    df['EMA_Sell'] = df['Selling'].ewm(span=3).mean()
+    traces.append(go.Scatter(
+        x=df['Date'], y=df['EMA_Sell'],
+        mode='lines',
+        name='Cash Selling',
+        line=dict(width=3, color=color_map["Cash_Sell"], dash=line_map['Sell']),
+        hovertemplate=None, hoverinfo='skip'
+    ))
 
-        # ===== Scatter(Original data) =====
-        traces.append(go.Scatter(
-            x=df['Date'], y=df['Buying'],
-            mode='markers',
-            name='Cash Buying',
-            showlegend=False,
-            marker=dict(size=6, color='rgba(26, 82,118,1.0)'),
-            hovertemplate='Buying: %{y:.4f}<extra></extra>'
-        ))
-        traces.append(go.Scatter(
-            x=df['Date'], y=df['Selling'],
-            mode='markers',
-            name='Cash Selling',
-            showlegend=False,
-            marker=dict(size=6, color='rgba(148, 49, 38,1.0)'),
-            hovertemplate='Selling: %{y:.4f}<extra></extra>'
-        ))
-    endtime   = df.loc[df.index.stop-1,"Date"]+pd.Timedelta(hours=24)
-    starttime = endtime-pd.Timedelta(hours=365*24)
+    # ===== Scatter(Original data) =====
+    traces.append(go.Scatter(
+        x=df['Date'], y=df['Buying'],
+        mode='markers',
+        name='Cash Buying',
+        showlegend=False,
+        marker=dict(size=6, color='rgba(26, 82,118,1.0)'),
+        hovertemplate='Buying: %{y:.4f}<extra></extra>'
+    ))
+    traces.append(go.Scatter(
+        x=df['Date'], y=df['Selling'],
+        mode='markers',
+        name='Cash Selling',
+        showlegend=False,
+        marker=dict(size=6, color='rgba(148, 49, 38,1.0)'),
+        hovertemplate='Selling: %{y:.4f}<extra></extra>'
+    ))
+
+    endtime = df['Date'].iloc[-1] + pd.Timedelta(hours=24)
+    starttime = endtime - pd.Timedelta(days=365)
+
     layout = go.Layout(
         xaxis=dict(
             title='Date',
@@ -232,8 +331,11 @@ def plot_now(currency):
     )
 
     fig = go.Figure(data=traces, layout=layout)
-    # fig.show()
-    fig.write_html(f"../Figure/plot_now_{currency}.html", full_html=True)
+
+    if show_html: fig.show()
+    if save_html: fig.write_html(f"{save_directory}/plot_now_{currency}.html", full_html=True)
+
+    return fig
 
 if __name__ =="__main__":
     # for currency in ["USD","JPY","EUR","CNY"]:
