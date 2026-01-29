@@ -19,6 +19,7 @@ def plot_currency(path, currency, title="Exchange Rate History"):
                 "Sell": 'dashdot',
                }
     for t in ['Cash', 'Spot']:
+        path = path.format(currency=currency,t=t)
         df = pd.read_csv(path)
         df['Date'] = pd.to_datetime(df['Date'])
         df['DateStr'] = df['Date'].dt.strftime('%Y-%m-%d %H:%M:%S')
