@@ -100,8 +100,8 @@
         <!-- 歷史匯率頁 -->
         <div id="page-rate">
             <div class="rate-btns">
-                <button class="active" data-currency="USD" data-type="history">USD</button>
-                <button data-currency="EUR" data-type="history">EUR</button>
+                <button class="active" data-currency="EUR" data-type="history">EUR</button>
+                <button data-currency="USD" data-type="history">USD</button>
                 <button data-currency="JPY" data-type="history">JPY</button>
                 <button data-currency="CNY" data-type="history">CNY</button>
             </div>
@@ -111,14 +111,14 @@
                     background:rgba(255,255,255,0.8); display:flex; align-items:center; justify-content:center;">
                     <div class="spinner"></div>
                 </div>
-                <iframe id="rate-frame" src="Figure/plot_USD.html"></iframe>
+                <iframe id="rate-frame" src="assets/plot_history_EUR.html"></iframe>
             </div>
         </div>
         <!-- 即時匯率頁 -->
         <div id="page-now" class="hidden">
             <div class="rate-btns">
-                <button class="active" data-currency="USD">USD</button>
-                <button data-currency="EUR">EUR</button>
+                <button class="active" data-currency="EUR">EUR</button>
+                <button data-currency="USD">USD</button>
                 <button data-currency="JPY">JPY</button>
                 <button data-currency="CNY">CNY</button>
             </div>
@@ -127,7 +127,7 @@
                                                      background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;">
                     <div class="spinner"></div>
                 </div>
-                <iframe id="now-frame" src="Figure/plot_now_USD.html" onload="resizeNowFrame()"></iframe>
+                <iframe id="now-frame" src="assets/plot_now_EUR.html" onload="resizeNowFrame()"></iframe>
             </div>
         </div>
         <!-- CNN新聞頁 -->
@@ -242,10 +242,10 @@
         const rateFrame = document.getElementById('rate-frame');
         const loadingSpinner = document.getElementById('loading-spinner');
         const plotFiles = {
-            USD: "Figure/plot_USD.html",
-            EUR: "Figure/plot_EUR.html",
-            JPY: "Figure/plot_JPY.html",
-            CNY: "Figure/plot_CNY.html"
+            USD: "assets/plot_history_USD.html",
+            EUR: "assets/plot_history_EUR.html",
+            JPY: "assets/plot_history_JPY.html",
+            CNY: "assets/plot_history_CNY.html"
         };
         rateBtns.forEach(btn => {
             btn.onclick = () => {
@@ -277,10 +277,10 @@
         const nowFrame = document.getElementById('now-frame');
         const nowLoading = document.getElementById('now-loading-spinner');
         const plotNowFiles = {
-            USD: "Figure/plot_now_USD.html",
-            EUR: "Figure/plot_now_EUR.html",
-            JPY: "Figure/plot_now_JPY.html",
-            CNY: "Figure/plot_now_CNY.html"
+            USD: "assets/plot_now_USD.html",
+            EUR: "assets/plot_now_EUR.html",
+            JPY: "assets/plot_now_JPY.html",
+            CNY: "assets/plot_now_CNY.html"
         };
         nowBtns.forEach(btn => {
             btn.onclick = () => {
@@ -341,9 +341,9 @@
             showTab('rate');
             // 預設快速切換（避免 plotly first load 沒 resize 好）
             loadingSpinner.style.display = 'flex';
-            rateFrame.src = plotFiles['EUR'];
+            rateFrame.src = plotFiles['USD'];
             setTimeout(() => {
-                rateFrame.src = plotFiles['USD'];
+                rateFrame.src = plotFiles['EUR'];
             }, 150);
             loadNews();
         });
