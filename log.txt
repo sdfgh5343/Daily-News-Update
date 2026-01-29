@@ -16,3 +16,20 @@ ValueError: time data "2026-01-30 00:01:00" doesn't match format "%Y/%m/%d %H:%M
     - passing `format` if your strings have a consistent format;
     - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
     - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-01-29 17:32:10,333 | INFO     | __main__ | Program started
+Traceback (most recent call last):
+  File "main.py", line 59, in <module>
+    plot.plot_history(csv_file_path=csv_file, 
+  File "/volume2/homes/administer/Daily-News-Update/utils/plot.py", line 115, in plot_history
+    fig.write_html(save_directory, full_html=True)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/plotly/basedatatypes.py", line 3712, in write_html
+    return pio.write_html(self, *args, **kwargs)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/plotly/io/_html.py", line 503, in write_html
+    path.write_text(html_str, "utf-8")
+  File "/usr/lib/python3.8/pathlib.py", line 1255, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+  File "/usr/lib/python3.8/pathlib.py", line 1222, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "/usr/lib/python3.8/pathlib.py", line 1078, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'assets/plot_history_USD.html'

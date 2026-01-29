@@ -58,14 +58,14 @@ if __name__ == "__main__":
         csv_file = f'Data/history/Historical_{currency}.csv'
         plot.plot_history(csv_file_path=csv_file, 
                           currency=currency,
-                          show_html = True,
-                          save_html = False,
+                          show_html = False,
+                          save_html = True,
                           save_directory = f"assets/plot_history_{currency}.html")
 
         plot.plot_now(csv_file_path =f'Data/Foreign Exchage Rate/Foreign Exchage Rate_{currency}.csv',
                       currency = currency,
-                      show_html = True,
-                      save_html = False,
+                      show_html = False,
+                      save_html = True,
                       save_directory = f"assets/plot_now_{currency}.html")
     
     # # 下載 CNN Business的新聞
