@@ -34,7 +34,7 @@ if __name__ == "__main__":
     get_daily_cnn_business_news_txt("../News/cnn_news.txt", limit=20)
     
     for currency in ["USD","JPY","EUR","CNY"]:
-        csv_file = 'Data/Historical Download/{currency}_{t}_Historical.csv'
+        csv_file = '../Data/Historical Download/{currency}_{t}_Historical.csv'
         plot_currency(path=csv_file, currency=currency)
 
         plot_now(csv_file_path =f'../Data/history/{currency}.csv',
