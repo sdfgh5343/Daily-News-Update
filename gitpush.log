@@ -2349,3 +2349,8 @@ To github.com:sdfgh5343/Daily-News-Update.git
    1b82139..6a37036  main -> main
 To github.com:sdfgh5343/Daily-News-Update.git
    6a37036..80fbb77  main -> main
+ssh: connect to host github.com port 22: Connection timed out
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
