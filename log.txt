@@ -213,3 +213,21 @@ ValueError: time data "2026-01-30 00:01:00" doesn't match format "%Y/%m/%d %H:%M
     - passing `format` if your strings have a consistent format;
     - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
     - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
+2026-01-30 03:00:02,361 | INFO     | __main__ | Program started
+Traceback (most recent call last):
+  File "main.py", line 65, in <module>
+    plot.plot_now(csv_file_path =f'Data/Foreign Exchage Rate/Foreign Exchage Rate_{currency}.csv',
+  File "/volume2/homes/administer/Daily-News-Update/utils/plot.py", line 131, in plot_now
+    df['Date'] = pd.to_datetime(df['Date'])
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 1050, in to_datetime
+    values = convert_listlike(arg._values, format)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 453, in _convert_listlike_datetimes
+    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)
+  File "/var/services/homes/administer/.local/lib/python3.8/site-packages/pandas/core/tools/datetimes.py", line 484, in _array_strptime_with_fallback
+    result, timezones = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)
+  File "pandas/_libs/tslibs/strptime.pyx", line 530, in pandas._libs.tslibs.strptime.array_strptime
+  File "pandas/_libs/tslibs/strptime.pyx", line 351, in pandas._libs.tslibs.strptime.array_strptime
+ValueError: time data "2026-01-30 00:01:00" doesn't match format "%Y/%m/%d %H:%M", at position 631. You might want to try:
+    - passing `format` if your strings have a consistent format;
+    - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
+    - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
