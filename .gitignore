@@ -2,3 +2,6 @@ main.py
 log.txt
 run.sh
 mailer.py
+Liner.py
+webhook.py
+.env
