@@ -41186,3 +41186,4 @@ ValueError: time data "2026-01-30 00:01:00" doesn't match format "%Y/%m/%d %H:%M
     - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;
     - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.
 2026-03-04 10:55:29,075 | INFO     | __main__ | Program started
+2026-03-04 11:00:02,375 | INFO     | __main__ | Program started
