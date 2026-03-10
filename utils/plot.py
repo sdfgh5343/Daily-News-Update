@@ -168,7 +168,7 @@ def plot_now(csv_file_path,currency,
     ))
 
     endtime = df['Date'].iloc[-1] + pd.Timedelta(hours=24)
-    starttime = endtime - pd.Timedelta(days=90)
+    starttime = endtime - pd.Timedelta(days=30)
 
     layout = go.Layout(
         xaxis=dict(

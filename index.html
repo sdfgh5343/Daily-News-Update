@@ -92,8 +92,8 @@
 
 <body>
     <div class="nav">
-        <button id="tab-rate" class="active">歷史匯率</button>
-        <button id="tab-now">即時匯率</button>
+        <button id="tab-now" class="active">即時匯率</button>
+        <button id="tab-rate">歷史匯率</button>
         <button id="tab-news">CNN Business</button>
     </div>
     <div class="container">
@@ -338,7 +338,7 @@
         // --- 初始化
         window.addEventListener('DOMContentLoaded', () => {
             // 預設顯示歷史匯率
-            showTab('rate');
+            showTab('now');
             // 預設快速切換（避免 plotly first load 沒 resize 好）
             loadingSpinner.style.display = 'flex';
             rateFrame.src = plotFiles['USD'];
