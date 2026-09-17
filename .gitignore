@@ -1,13 +1,35 @@
+# Python cache
 __pycache__/
+*.pyc
+
+# Synology metadata
 @eaDir/
+
+# Old / temporary folders
 Old Code/
 log/
-gitpush.log
-main.py
-log.txt
+ver.2/
+
+# Shell scripts
 run.sh
+run_crawl.sh
+
+# Logs
+gitpush.log
+run_test.log
+log.txt
+*.log
+
+# Local Python scripts
+main.py
+crawl.py
 mailer.py
 Liner.py
 webhook.py
+
+# Secrets
 .env
+
+# Jupyter
 test.ipynb
+.ipynb_checkpoints/

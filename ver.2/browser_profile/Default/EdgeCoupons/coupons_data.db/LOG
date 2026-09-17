@@ -1,6 +1,0 @@
-2026/09/17-14:44:00.668 16b0 Reusing MANIFEST C:\Users\u0156396\Desktop\ver.2\browser_profile\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2026/09/17-14:44:00.668 16b0 Recovering log #7
-2026/09/17-14:44:00.668 16b0 Reusing old log C:\Users\u0156396\Desktop\ver.2\browser_profile\Default\EdgeCoupons/coupons_data.db/000007.log 
-2026/09/17-14:44:00.751 5070 Level-0 table #11: started
-2026/09/17-14:44:00.760 5070 Level-0 table #11: 683376 bytes OK
-2026/09/17-14:44:00.766 5070 Delete type=0 #7
