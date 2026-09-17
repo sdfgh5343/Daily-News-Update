@@ -33,13 +33,13 @@ if __name__ == "__main__":
     ###################################################################
     # Historical Foreign Exchange Rate - Closing Rate
     now_utc = dt.datetime.now(dt.timezone.utc)
-    if now_utc.hour == 11: # Execute one time everyday
-        output1 = fetch_twbank_exchange(URL="https://rate.bot.com.tw/xrt/all/day",
-                                        currencies=CURRENCIES)
-        # Append data to dataset
-        update_file(dataframe = output1,
-                    update_file="Data/history/Historical_{currency}.csv",
-                    currencies= CURRENCIES)
+    # if now_utc.hour == 11: # Execute one time everyday
+    output1 = fetch_twbank_exchange(URL="https://rate.bot.com.tw/xrt/all/day",
+                                    currencies=CURRENCIES)
+    # Append data to dataset
+    update_file(dataframe = output1,
+                update_file="Data/history/Historical_{currency}.csv",
+                currencies= CURRENCIES)
     
     # Foreign Exchange Rate - Non-Business Hours
     output2 = fetch_twbank_exchange(URL="https://rate.bot.com.tw/xrt?Lang=en-US",

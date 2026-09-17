@@ -16,3 +16,20 @@ FIG_DIR     = ROOT / "Figure"
 CNN_TXT     = NEWS_DIR / "cnn_news.txt"
 INDEX_HTML  = ROOT / "index.html"
 ASSETS_DIR  = ROOT / "assets"
+
+# ==========================================
+# Chrome / Playwright
+# ==========================================
+
+CHROME_PATH = (
+    Path.home()
+    / "browsers"
+    / "chrome"
+    / "chrome-linux64"
+    / "chrome"
+)
+
+CHROME_ARGS = [
+    "--no-sandbox",
+    "--disable-dev-shm-usage",
+]

@@ -1,0 +1,145 @@
++ set -euo pipefail
++ PROJECT_DIR=/var/services/homes/administer/Daily-News-Update
++ CONDA_ENV=/var/services/homes/administer/python-envs/main
++ echo '===== 1. Activate Conda ====='
+===== 1. Activate Conda =====
++ source /var/services/homes/administer/miniconda3/etc/profile.d/conda.sh
+++ export CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ export _CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ _CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ export CONDA_PYTHON_EXE=/var/services/homes/administer/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/var/services/homes/administer/miniconda3/bin/python
+++ export _CONDA_ROOT=/var/services/homes/administer/miniconda3
+++ _CONDA_ROOT=/var/services/homes/administer/miniconda3
+++ '[' -z x ']'
++ conda activate /var/services/homes/administer/python-envs/main
++ local cmd=activate
++ case "$cmd" in
++ __conda_activate activate /var/services/homes/administer/python-envs/main
++ '[' -n '' ']'
++ local ask_conda
+++ PS1=
+++ __conda_exe shell.posix activate /var/services/homes/administer/python-envs/main
+++ '[' -n '' ']'
+++ /var/services/homes/administer/miniconda3/bin/conda shell.posix activate /var/services/homes/administer/python-envs/main
++ ask_conda='. "/var/services/homes/administer/python-envs/main/etc/conda/deactivate.d/libglib_deactivate.sh"
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+PS1='\''(/var/services/homes/administer/python-envs/main) '\''
+export PATH='\''/var/services/homes/administer/python-envs/main/bin:/var/services/homes/administer/miniconda3/condabin:/var/services/homes/administer/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_PROMPT_MODIFIER='\''(/var/services/homes/administer/python-envs/main) '\''
+export CONDA_EXE='\''/var/services/homes/administer/miniconda3/bin/conda'\''
+export _CONDA_EXE='\''/var/services/homes/administer/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/var/services/homes/administer/miniconda3/bin/python'\''
+export _CONDA_ROOT='\''/var/services/homes/administer/miniconda3'\''
+. "/var/services/homes/administer/python-envs/main/etc/conda/activate.d/browser_env.sh"
+. "/var/services/homes/administer/python-envs/main/etc/conda/activate.d/libglib_activate.sh"'
++ eval '. "/var/services/homes/administer/python-envs/main/etc/conda/deactivate.d/libglib_deactivate.sh"
+export _CE_M='\'''\''
+export _CE_CONDA='\'''\''
+PS1='\''(/var/services/homes/administer/python-envs/main) '\''
+export PATH='\''/var/services/homes/administer/python-envs/main/bin:/var/services/homes/administer/miniconda3/condabin:/var/services/homes/administer/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin'\''
+export CONDA_SHLVL='\''1'\''
+export CONDA_PROMPT_MODIFIER='\''(/var/services/homes/administer/python-envs/main) '\''
+export CONDA_EXE='\''/var/services/homes/administer/miniconda3/bin/conda'\''
+export _CONDA_EXE='\''/var/services/homes/administer/miniconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/var/services/homes/administer/miniconda3/bin/python'\''
+export _CONDA_ROOT='\''/var/services/homes/administer/miniconda3'\''
+. "/var/services/homes/administer/python-envs/main/etc/conda/activate.d/browser_env.sh"
+. "/var/services/homes/administer/python-envs/main/etc/conda/activate.d/libglib_activate.sh"'
+++ . /var/services/homes/administer/python-envs/main/etc/conda/deactivate.d/libglib_deactivate.sh
++++ export GSETTINGS_SCHEMA_DIR=
++++ GSETTINGS_SCHEMA_DIR=
++++ unset GSETTINGS_SCHEMA_DIR_CONDA_BACKUP
++++ '[' -z ']'
++++ unset GSETTINGS_SCHEMA_DIR
+++ export _CE_M=
+++ _CE_M=
+++ export _CE_CONDA=
+++ _CE_CONDA=
+++ PS1='(/var/services/homes/administer/python-envs/main) '
+++ export PATH=/var/services/homes/administer/python-envs/main/bin:/var/services/homes/administer/miniconda3/condabin:/var/services/homes/administer/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin
+++ PATH=/var/services/homes/administer/python-envs/main/bin:/var/services/homes/administer/miniconda3/condabin:/var/services/homes/administer/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/syno/sbin:/usr/syno/bin:/usr/local/sbin:/usr/local/bin
+++ export CONDA_SHLVL=1
+++ CONDA_SHLVL=1
+++ export 'CONDA_PROMPT_MODIFIER=(/var/services/homes/administer/python-envs/main) '
+++ CONDA_PROMPT_MODIFIER='(/var/services/homes/administer/python-envs/main) '
+++ export CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ export _CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ _CONDA_EXE=/var/services/homes/administer/miniconda3/bin/conda
+++ export CONDA_PYTHON_EXE=/var/services/homes/administer/miniconda3/bin/python
+++ CONDA_PYTHON_EXE=/var/services/homes/administer/miniconda3/bin/python
+++ export _CONDA_ROOT=/var/services/homes/administer/miniconda3
+++ _CONDA_ROOT=/var/services/homes/administer/miniconda3
+++ . /var/services/homes/administer/python-envs/main/etc/conda/activate.d/browser_env.sh
++++ export LD_LIBRARY_PATH=/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib
++++ LD_LIBRARY_PATH=/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib:/var/services/homes/administer/python-envs/main/lib
++++ export FONTCONFIG_PATH=/var/services/homes/administer/python-envs/main/etc/fonts
++++ FONTCONFIG_PATH=/var/services/homes/administer/python-envs/main/etc/fonts
++++ export FONTCONFIG_FILE=/var/services/homes/administer/python-envs/main/etc/fonts/fonts.conf
++++ FONTCONFIG_FILE=/var/services/homes/administer/python-envs/main/etc/fonts/fonts.conf
+++ . /var/services/homes/administer/python-envs/main/etc/conda/activate.d/libglib_activate.sh
++++ export GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
++++ GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
++++ export GSETTINGS_SCHEMA_DIR=/var/services/homes/administer/python-envs/main/share/glib-2.0/schemas
++++ GSETTINGS_SCHEMA_DIR=/var/services/homes/administer/python-envs/main/share/glib-2.0/schemas
++ __conda_hashr
++ '[' -n '' ']'
++ '[' -n '' ']'
++ hash -r
++ echo '[OK] Conda'
+[OK] Conda
++ export LD_LIBRARY_PATH=/var/services/homes/administer/python-envs/main/lib
++ LD_LIBRARY_PATH=/var/services/homes/administer/python-envs/main/lib
++ export FONTCONFIG_PATH=/var/services/homes/administer/python-envs/main/etc/fonts
++ FONTCONFIG_PATH=/var/services/homes/administer/python-envs/main/etc/fonts
++ export FONTCONFIG_FILE=/var/services/homes/administer/python-envs/main/etc/fonts/fonts.conf
++ FONTCONFIG_FILE=/var/services/homes/administer/python-envs/main/etc/fonts/fonts.conf
++ echo '===== 2. Start Xvfb ====='
+===== 2. Start Xvfb =====
++ export DISPLAY=:99
++ DISPLAY=:99
++ XVFB_STARTED=0
++ pgrep -f 'Xvfb :99'
++ XVFB_PID=9263
++ XVFB_STARTED=1
++ sleep 2
++ Xvfb :99 -screen 0 1280x720x24 -nolisten tcp
++ echo '[OK] Xvfb'
+[OK] Xvfb
++ trap cleanup EXIT
++ cd /var/services/homes/administer/Daily-News-Update
++ echo '===== 3. Crawl Bank of Taiwan ====='
+===== 3. Crawl Bank of Taiwan =====
++ python crawl.py
+Starting Chrome...
+Opening: https://rate.bot.com.tw/xrt?Lang=zh-TW
+Title: 臺灣銀行牌告匯率
+URL: https://rate.bot.com.tw/xrt?Lang=zh-TW
+Exchange rate table loaded
+CSV link count: 1
+Download URL: https://rate.bot.com.tw/xrt/flcsv/0/day
+Suggested filename: ExchangeRate@202609172222.csv
+CSV saved: /volume2/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv
+Done
++ echo '[OK] crawl.py'
+[OK] crawl.py
++ echo '===== 4. Check downloaded CSV ====='
+===== 4. Check downloaded CSV =====
+++ find '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save' -maxdepth 1 -type f -name 'ExchangeRate@*.csv' -printf '%T@ %p\n'
+++ sed -n '1{s/^[^ ]* //;p;}'
+++ sort -nr
++ LATEST_CSV='/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv'
++ '[' -z '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv' ']'
++ echo '[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv'
+[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv
++ echo '===== 6. Git ====='
+===== 6. Git =====
++ git add .

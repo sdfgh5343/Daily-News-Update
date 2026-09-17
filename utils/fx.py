@@ -1,13 +1,21 @@
 # utils/fx.py
 import re
 import os
-import requests
 import datetime
 import pandas as pd
 import datetime as dt
-from bs4 import BeautifulSoup
 
-from .config import CURRENCIES, TYPES, HISTDL_DIR
+from pathlib import Path
+from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
+
+from .config import (
+    CURRENCIES,
+    TYPES,
+    HISTDL_DIR,
+    CHROME_PATH,
+    CHROME_ARGS,
+)
 
 # 先沿用你原本的函式（避免一次改太多）:contentReference[oaicite:4]{index=4}
 # from Download_historical import fetch_twbank_exchange, get_and_save_exchange_rates
@@ -40,15 +48,75 @@ def _get_quoted_datetime(soup: BeautifulSoup):
     m = re.search(r"(\d{4}/\d{2}/\d{2} \d{2}:\d{2})", info_p.get_text(strip=True))
     return pd.to_datetime(m.group(1)) if m else None
 
-def fetch_twbank_exchange(URL,
-                          save_html:bool = False,
-                          save_directory = None,
-                          currencies = None) -> pd.DataFrame:
-    session = requests.Session()
-    res = session.get(URL, timeout=15)
-    res.raise_for_status()
-    res.encoding = "utf-8"
-    soup = BeautifulSoup(res.text, "html.parser")
+def _fetch_html_with_browser(url: str) -> str:
+
+    if not CHROME_PATH.exists():
+        raise RuntimeError(
+            f"Chrome executable does not exist: {CHROME_PATH}"
+        )
+
+    with sync_playwright() as p:
+
+        browser = p.chromium.launch(
+            executable_path=str(CHROME_PATH),
+            headless=False,
+            args=CHROME_ARGS,
+        )
+
+        try:
+            context = browser.new_context()
+            page = context.new_page()
+
+            print(f"Opening: {url}")
+
+            page.goto(
+                url,
+                wait_until="domcontentloaded",
+                timeout=60000,
+            )
+
+            # 等臺銀 Challenge
+            for i in range(60):
+
+                title = page.title()
+
+                if "Challenge Validation" not in title:
+                    break
+
+                print(f"Challenge... {i + 1}")
+                page.wait_for_timeout(1000)
+
+            else:
+                raise RuntimeError(
+                    "Bank of Taiwan Challenge did not complete."
+                )
+
+            # 等匯率 table
+            page.wait_for_selector(
+                "table.table",
+                timeout=30000,
+            )
+
+            print("Bank of Taiwan page loaded")
+
+            return page.content()
+
+        finally:
+            browser.close()
+
+def fetch_twbank_exchange(
+    URL,
+    save_html: bool = False,
+    save_directory=None,
+    currencies=None,
+) -> pd.DataFrame:
+
+    html = _fetch_html_with_browser(URL)
+
+    soup = BeautifulSoup(
+        html,
+        "html.parser"
+    )
 
     quoted_dt = _get_quoted_datetime(soup)
     if quoted_dt is None: print("Warning: Cannot find Quoted Date. Set Date=None")
