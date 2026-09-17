@@ -108,7 +108,7 @@ export _CONDA_ROOT='\''/var/services/homes/administer/miniconda3'\''
 + DISPLAY=:99
 + XVFB_STARTED=0
 + pgrep -f 'Xvfb :99'
-+ XVFB_PID=9263
++ XVFB_PID=25827
 + XVFB_STARTED=1
 + sleep 2
 + Xvfb :99 -screen 0 1280x720x24 -nolisten tcp
@@ -126,20 +126,32 @@ URL: https://rate.bot.com.tw/xrt?Lang=zh-TW
 Exchange rate table loaded
 CSV link count: 1
 Download URL: https://rate.bot.com.tw/xrt/flcsv/0/day
-Suggested filename: ExchangeRate@202609172222.csv
-CSV saved: /volume2/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv
+Suggested filename: ExchangeRate@202609172302.csv
+CSV saved: /volume2/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172302.csv
 Done
 + echo '[OK] crawl.py'
 [OK] crawl.py
 + echo '===== 4. Check downloaded CSV ====='
 ===== 4. Check downloaded CSV =====
-++ find '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save' -maxdepth 1 -type f -name 'ExchangeRate@*.csv' -printf '%T@ %p\n'
-++ sed -n '1{s/^[^ ]* //;p;}'
 ++ sort -nr
-+ LATEST_CSV='/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv'
-+ '[' -z '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv' ']'
-+ echo '[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv'
-[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172222.csv
-+ echo '===== 6. Git ====='
-===== 6. Git =====
-+ git add .
+++ sed -n '1{s/^[^ ]* //;p;}'
+++ find '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save' -maxdepth 1 -type f -name 'ExchangeRate@*.csv' -printf '%T@ %p\n'
++ LATEST_CSV='/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172302.csv'
++ '[' -z '/var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172302.csv' ']'
++ echo '[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172302.csv'
+[OK] CSV: /var/services/homes/administer/Daily-News-Update/Data/Temporary Save/ExchangeRate@202609172302.csv
++ echo '===== 5. Run main.py ====='
+===== 5. Run main.py =====
++ python main.py
+Traceback (most recent call last):
+  File "/volume2/homes/administer/Daily-News-Update/main.py", line 6, in <module>
+    from utils.fx import  update_daily_rates, fetch_twbank_exchange, update_file
+  File "/volume2/homes/administer/Daily-News-Update/utils/__init__.py", line 19, in <module>
+    from . import news
+  File "/volume2/homes/administer/Daily-News-Update/utils/news.py", line 2, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'
++ cleanup
++ '[' 1 -eq 1 ']'
++ kill 25827
++ true
